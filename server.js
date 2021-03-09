@@ -9,7 +9,6 @@ const methodOverride = require('method-override');
 require('dotenv').config();
 
 const PORT = process.env.PORT;
-unsplash_url = `https://api.unsplash.com/search/photos?query=${dogs}&client_id=${APIKEY}`
 //Middleware
 // app.use(express.static('./views')); ?? do we need?
 app.use(express.static('./public'));
