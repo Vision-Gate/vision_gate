@@ -1,5 +1,94 @@
-* {
-  background-color: rgb(122, 122, 122);
-  color: rgb(0, 0, 0);
-  border: rgb(61, 61, 61) solid thin;
+@import url('http://fonts.googleapis.com/css?family=Robot');
+
+body{
+  background: url('/img/img1.jpg') no-repeat top center;
+  background-size: cover;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: whitesmoke;
+  text-shadow: 2px 2px #040255;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.wrapper{
+  position: relative;
+  width: 100%;
+}
+
+fieldset {
+  border: none;
+}
+
+.search-form {
+  max-width: 550px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 5px;
+  display: flex;
+  box-shadow: 0 0 10px rgba(0,0,0,0.13);
+}
+
+label {
+  color: white;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  margin-right: 4%;
+  width: 90%;
+}
+
+.input {
+  margin: 10px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid white;
+  padding: 10px;
+  color: white;
+  width: 100%;
+}
+
+::-webkit-input-placeholder{
+  color: white;
+}
+
+::-moz-input-placeholder{
+  color: white;
+}
+
+::-ms-input-placeholder{
+  color: white;
+}
+
+.button {
+  background: rgb(72, 145, 173);
+  text-align: center;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase; 
+}
+
+@media screen and (max-width: 600px) {
+  .search-form{
+    flex-direction: column;
+  }
+  .input-fields {
+    width: 100%;
+  }
 }
