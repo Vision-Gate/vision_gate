@@ -8,5 +8,19 @@
 </head>
 <body>
   <h1>INDEX.EJS</h1>
+
+  <form class="search-form" action="/categories" method="POST">
+    <fieldset class="input-fields">
+      <input class="input" type="text" name="username" placeholder="Your username" value="">
+      <input class="input" type="text" name="search_query"  placeholder="Vision search">
+      <input class="button" type="submit" value="search">
+      <input class="button" type="submit" value="My Board">
+  </form>
+
+  <div>
+    <h2> <%= quote.quote %> </h2>
+    <h3> <%= quote.author %></h3>
+  </div>
+
 </body>
 </html>
