@@ -21,10 +21,10 @@ app.set('view engine', 'ejs');
 const client = new pg.Client(process.env.DATABASE_URL);
 
 //Routes
-app.get('/', renderHomePage);
-app.get('/search', redirectHome);
+app.get('/', displayHomePage);
 app.get('/userboard', displayUserboard);
 app.get('/details/:user/:id', displayDetails);
+app.get('/about_us', displayAboutUs);
 
 app.post('/categories', conductSearch);
 app.post('/newentry', addToBoard);
@@ -33,20 +33,16 @@ app.delete('/details/:user/:id', deleteEntry);
 app.put('/details/:user/:id', updateEntry);
 
 //Callbacks
-function renderHomePage(req, res) {
-
-}
-
-function redirectHome(req, res) {
-  
+function displayHomePage(req, res) {
+  res.render('./index.ejs')
 }
 
 function displayUserboard(req, res) {
-  
+  res.render('./userboard.ejs')
 }
 
 function displayDetails(req, res) {
-  
+  res.render('./details.ejs')
 }
 
 function conductSearch(req, res) {
@@ -64,6 +60,10 @@ function deleteEntry(req, res) {
 
 function updateEntry(req, res) {
   
+}
+
+function displayAboutUs(req, res) {
+  res.render('./about_us.ejs')
 }
 
 function Vision (username, image_url, description, goal_deadline) {
