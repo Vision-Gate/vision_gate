@@ -1,2 +1,1 @@
-# vision_gate
-vision_gate
+# Vision Gate
