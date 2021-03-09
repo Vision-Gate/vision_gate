@@ -9,11 +9,17 @@
 <body>
   <h1>SAVES.EJS</h1>
 
-  <% visionList.forEach(image => { %>
+  <% visionQuery.visionList.forEach(image => { %>
 
     <img src="<%= image %>" alt=""> 
-
+    
+    <form action="/" method="">
+      <input type="text" hidden name="image" value="<%= image %>">
+      <input type="text" hidden name="username" value="<%= visionQuery.query.username %>">
+      <input type="submit" value="save">
+    </form>
   <% }) %>
+
 
 </body>
 </html>

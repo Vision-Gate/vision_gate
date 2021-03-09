@@ -26,9 +26,9 @@ app.get('/', displayHomePage);
 app.get('/userboard', displayUserboard);
 app.get('/details/:user/:id', displayDetails);
 app.get('/about_us', displayAboutUs);
-app.get('/saves', displaySearchResults)
+app.get('/saves/:keyword', displaySearchResults)
 
-// app.post('/categories', conductSearch);
+app.post('/categories', conductSearch);
 app.post('/newentry', addToBoard);
 
 app.delete('/details/:user/:id', deleteEntry);
@@ -36,7 +36,14 @@ app.put('/details/:user/:id', updateEntry);
 
 //Callbacks
 function displayHomePage(req, res) {
-  res.render('./index.ejs')
+  const url = `http://quotes.stormconsultancy.co.uk/popular.json`;
+  superagent.get(url)
+    .then(resultsFromAPI => {
+      const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
+      console.log(quote)
+      const ejsObject = {quote};
+      res.render('./index.ejs', ejsObject);
+    })
 }
 
 function displayUserboard(req, res) {
@@ -48,14 +55,21 @@ function displayDetails(req, res) {
 }
 
 function displaySearchResults(req, res) {
-  const url = `https://api.unsplash.com/search/photos?query=${req.body.query}&client_id=${UNSPLASH_KEY}`;
+}
+
+function conductSearch(req, res) {
+  console.log(req.body, req.body.search_query);
+  const url = `https://api.unsplash.com/search/photos?query=${req.body.search_query}&client_id=${UNSPLASH_KEY}`;
   superagent.get(url)
     .then(results => {
       const visionList = new createVisionList(results.body.results);
       console.log(visionList);
-      const ejsObject = {visionList};
+      const query = req.body
+      const ejsObject = {visionQuery: {visionList, query}};
       res.render('./saves.ejs', ejsObject);
     })
+  
+  // res.redirect('/saves')
 }
 
 function addToBoard(req, res) {
@@ -75,6 +89,8 @@ function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
 }
 
+
+// Image functions
 function Vision (username, image_url, description, goal_deadline) {
   this.username = username;
   this.image_url - image_url;
@@ -86,6 +102,24 @@ function createVisionList (object) {
   return object.map(image => {
   return image.urls.regular;
   })
+}
+
+// Quote functions
+
+function Quote (quote, author) {
+  this.quote = quote;
+  this.author = author;
+}
+
+function createQuoteList (object) {
+  return object.map (obj => {
+  return new Quote(obj.quote, obj.author);
+  });
+}
+
+function getRandomQuote (quoteList) {
+  const idx = Math.floor(Math.random() * Math.floor(quoteList.length));
+  return quoteList[idx];
 }
 
 client.connect()
