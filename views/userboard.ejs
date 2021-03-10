@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <link rel="stylesheet" href="./styles/base.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +12,36 @@
 <body>
   <%- include('./layout/header.ejs') %>
   <main>
-    <h1>USERBOARD.EJS</h1>
-    <form action="/userboard" method="POST">
-    <select action='/userboard' name="choice">
-      <option name='username' value="default" selected>Choose a User</option>
-      <% visionQuery.userList.forEach(user => { %>
-        <option name="username" value= <%= user %> > <%= user %> </option>  <% }) %>
-    </select>
-    <input type="submit">
-    </form>
-
-    <% visionQuery.visionList.forEach(image => { %>
-      <img src="<%= image.image_url %>" alt="">     
-      <input type="text" hidden name="image" value="<%= image.image_url %>">
-      <input type="text" hidden name="username" value="<%= visionQuery.username %>">
-      <input type="submit" value="details">
+    <h1>MY VISION BOARD</h1>
+    <div class="drop-down">
+      <form action="/userboard" method="POST">
+      <select action='/userboard' name="choice" class="drop-down-form">
+        <option name='username' value="default" selected>Choose a User</option>
+        <% visionQuery.userList.forEach(user => { %>
+          <option name="username" value= <%= user %> > <%= user %> </option>  <% }) %>
+      </select>
+      <input type="submit" class="drop-down-button">
+      </form>
+    </div>
+    <div class ="grid">
+      <% visionQuery.visionList.forEach(image => { %>
+        <form action="/details/<%= image.username %>/1" method="POST" type="submit">
+          <button>
+          <div class="grid-item">
+            <img src="<%= image.image_url %>" alt="my pin">
+            <div class="details">
+            <span class="title"><%= image.description %></span>
+              <span class="info"><%= image.deadline %></span>
+            <input type="text" hidden name="image" value="<%= image.image_url %>">
+            <input type="text" hidden name="username" value="<%= visionQuery.username %>">
+            <input type="text" hidden name="id" value="<%= visionQuery.username %>">
+          </div> 
+        </button>
+            <!-- <input type="submit" value="details"> -->
+        </form>
     <% }) %>
   </main>
   <%- include('./layout/footer.ejs') %>
+  <script src="app.js"></script>
 </body>
 </html>
