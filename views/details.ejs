@@ -13,7 +13,7 @@
     <h1>UPDATE YOUR PIN</h1>
     <div class="update-wrapper">
             <!-- ACTION & METHOD-->
-      <form class="update-form" action="/categories" method="POST"> 
+      <form action="/details/:user/:id?_method=PUT" method="POST"> 
         <fieldset class="update-input-fields">
           <div class="update-left">
             <label>Modify your visions, set a deadline, or remove your goals from your board</label>
@@ -31,9 +31,12 @@
             <img src="/img/img3.jpg" class="update-img"/>
                 <!-- BUTTONS-->
             <input class="button" type="submit" value="Update">
-            <input class="button" type="submit" value="Delete">
           </div>
         </fieldset>
+      </form>
+                <!-- DELETE -->
+      <form class="update-form" action="/details/:user/:id?_method=DELETE" method="POST" >
+        <input class="button" type="submit" value="Delete">
       </form>
     </div>
   </main>

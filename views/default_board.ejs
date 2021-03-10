@@ -12,7 +12,7 @@
 <body>
   <%- include('./layout/header.ejs') %>
   <main>
-    <h1>USERBOARD</h1>
+    <h1>CHOOSE YOUR BOARD</h1>
             <!--DROP DOWN FORM-->
     <div class="drop-down">
       <form action="/userboard" method="POST">
@@ -27,7 +27,7 @@
             <!--MASONRY GRID-->
     <div class ="grid">
     <% visionQuery.visionList.forEach(image => { %>
-      <div class="grid-item">
+      <div class="grid-item">emo
         <img src="<%= image.image_url %>" alt="my pin">
         <div class="details">
         <span class="title">Lorem Ipsum Dolor</span>
