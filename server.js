@@ -22,7 +22,7 @@ const UNSPLASH_KEY = process.env.UNSPLASH_KEY
 //#region Routes
 app.get('/', displayHomePage);
 app.get('/userboard', populateDefaultUserboard);
-app.get('/details/:user/:id', displayDetails);
+app.post('/details', displayDetails);
 app.get('/about_us', displayAboutUs);
 app.get('/saves', displaySearchResults)
 
@@ -85,7 +85,11 @@ function displayUsersboard(req, res) {
     const sqlArr = [req.body.choice];
     const userList = [];
     savedUserResult.rows.map(user =>{if(!userList.includes(user.username))
-      {userList.push(user.username);} });
+      {
+        userList.push(user.username);
+        userList.push(user.id);
+      } 
+    });
     client.query(sqlString,sqlArr)
     .then(visionResult => 
     {
