@@ -22,18 +22,18 @@ const UNSPLASH_KEY = process.env.UNSPLASH_KEY
 
 //Routes
 app.get('/', displayHomePage);
-app.get('/userboard', populateDefaultUsers);
+app.get('/userboard', populateDefaultUserboard);
 app.get('/details/:user/:id', displayDetails);
 app.get('/about_us', displayAboutUs);
 app.get('/saves', displaySearchResults)
 
 app.post('/search', conductSearch);
-// app.post('/userboard',displayUserboard);
+app.post('/userboard',displaySavedUserboards);
 app.post('/newentry', addToBoard);
 
 app.delete('/details/:user/:id', deleteEntry);
 app.put('/details/:user/:id', updateEntry);
-
+let currentUserList = [];
 //Callbacks
 function displayHomePage(req, res) {
   const url = `http://quotes.stormconsultancy.co.uk/popular.json`;
@@ -46,7 +46,7 @@ function displayHomePage(req, res) {
     })
 }
 
-function populateDefaultUsers(req,res){
+function populateDefaultUserboard(req,res){
   const sqlString = 'SELECT * FROM visions WHERE username=$1;';
   const sqlArr = ['default'];
   client.query(sqlString,sqlArr)
@@ -60,13 +60,30 @@ function populateDefaultUsers(req,res){
         userList.push(user.username);
       }
     });
-    console.log(userList);
-    const ejsObj = {visionQuery: {userList,visionList}};
+    includeSavedUsersToDropdown(visionList,userList,res);
+  })
+}
+
+function includeSavedUsersToDropdown(visionList,userList,res){
+  const sqlStr = 'SELECT * FROM users;';
+  const sqlArr = [];
+  
+  client.query(sqlStr,sqlArr)
+  .then(results =>{
+    results.rows.forEach(user => {
+      if(!currentUserList.includes(user.username)){
+        currentUserList.push(user.username);
+      }
+    })
+    const combinedUsers = userList.concat(currentUserList);
+    console.log("Combined Users: ",combinedUsers);
+    const ejsObj = {visionQuery: {combinedUsers,visionList}};
     res.render('./default_board.ejs',ejsObj);
   })
 }
+
 //Populate Saved Images
-function populateUsers(req, res) {
+function displaySavedUserboards(req, res) {
   //User is whatever is currently selected
   // const sqlUsers = 'SELECT DISTINCT username FROM users;';
   // const sqlUsersArr = [];
@@ -81,11 +98,10 @@ function populateUsers(req, res) {
       client.query(sqlString,sqlArr)
       .then(result => 
       {
-        console.log(result.rows);
+        const user = result.rows[0];
         console.log(`Displaying visions for ${result.rows}`);
         const visionList = result.rows;
-        // const userList = userResults.rows;
-        // const ejsObj = {visionQuery: {userList,visionList}};
+        const ejsObj = {visionQuery: {user,visionList}};
         res.render('./userboard.ejs');
       })
   // })
