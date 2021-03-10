@@ -13,13 +13,13 @@
     <h1>UPDATE YOUR PIN</h1>
     <div class="update-wrapper">
             <!-- ACTION & METHOD-->
-      <form action="/details/:user/:id?_method=PUT" method="POST"> 
+      <form action="/details?_method=PUT" method="POST"> 
         <fieldset class="update-input-fields">
           <div class="update-left">
             <label>Modify your visions, set a deadline, or remove your goals from your board</label>
             <!-- DESCRIPTION -->
-            <input class="update-input" id="large-msg-box" type="textarea" placeholder="Add a description">
-            <input class="update-input" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31">
+            <input class="update-input" id="large-msg-box" type="textarea" placeholder=" visionList.user.description ">
+            <input class="update-input" id="date" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31">
             <!-- DEADLINE -->
             <div class="deadline-checkbox">
               <!-- <input class="update-input" type="checkbox" id="complete"> -->
@@ -28,7 +28,9 @@
           </div>
           <div class="update-right">
                 <!-- IMAGE -->
-            <img src="/img/img3.jpg" class="update-img"/>
+                <% visionList.forEach(vision => { %>
+                  <img src="<%= vision.image_url%>" class="update-img"/>
+                <% }) %>
                 <!-- BUTTONS-->
             <input class="button" type="submit" value="Update">
           </div>
