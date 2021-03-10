@@ -30,7 +30,7 @@ app.post('/search', conductSearch);
 app.post('/userboard',displayUsersboard);
 app.post('/newentry', addToBoard);
 
-app.delete('/details/:user/:id', deleteEntry);
+app.delete('/details/:id', deleteEntry);
 app.put('/details/:user/:id', updateEntry);
 //#endregion
 //#region Route Callbacks
@@ -137,10 +137,14 @@ function addToBoard(req, res) {
 }
 function deleteEntry(req, res) {
   console.log('in the delete function');
+  console.log(req.params.id)
   const sqlString = 'DELETE FROM visions WHERE id=$1;';
   const sqlArr = [req.params.id];
   client.query(sqlString, sqlArr)
-    .then(res.redirect('./userboard.ejs'))
+    .then(results => {
+      console.log(results);
+      res.redirect('/userboard')
+    })
 }
 function updateEntry(req, res) {
   console.log('in the update function', req.body);
