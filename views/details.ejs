@@ -36,10 +36,13 @@
           </div>
         </fieldset>
       </form>
-                <!-- DELETE -->
-      <form class="update-form" action="/details/:user/:id?_method=DELETE" method="POST" >
-        <input class="button" type="submit" value="Delete">
-      </form>
+      <!-- DELETE -->
+      <% visionList.forEach(vision => { %>
+          <form class="update-form" action="/details/<%= vision.id%>?_method=DELETE" method="POST" >
+            <input class="button" type="submit" value="Delete">
+          </form>
+      <% }) %>
+
     </div>
   </main>
   <%- include('./layout/footer.ejs') %>
