@@ -101,8 +101,14 @@ function displayUsersboard(req, res) {
   .catch(error => handleError(error,res));
 }
 function displayDetails(req, res) {
-
-  res.render('./details.ejs')
+  const sqlStr = `SELECT * FROM visions WHERE id=$1;`;
+  const sqlArr= [req.body.id];
+  client.query(sqlStr,sqlArr)
+  .then(result =>{
+    const user = [result.rows[0]];
+    const ejsObj = {visionList:user};
+    res.render('./details.ejs',ejsObj);
+  })
 }
 function displaySearchResults(req, res) {
   res.render('./saves.ejs');
@@ -114,7 +120,8 @@ function conductSearch(req, res) {
   const url = `https://api.unsplash.com/search/photos?query=${req.body.search_query}&client_id=${UNSPLASH_KEY}`;
   superagent.get(url)
   .then(results => {
-      const visionList = new createVisionList(results.body.results);
+      const visionList = new createVisionList(results.body.results,req.body.username);
+      console.log(visionList);
       const query = req.body
       const ejsObject = {visionQuery: {visionList, query}};
       res.render('./saves.ejs', ejsObject);
@@ -141,8 +148,6 @@ function updateEntry(req, res) {
   const sqlArr = [req.body.description, req.body.deadline, req.params.id];
   client.query(sqlStr, sqlArr)
     .then
-    // let user = req.params.username;
-    // let id = req.params.id;
     (res.redirect('./userboard.ejs')) // add specific username extension with 140, 141?
 }
 function displayAboutUs(req, res) {
@@ -153,16 +158,22 @@ function handleError(error,res){
 }
 //#endregion
 //#region Vision Constructors
-function Vision (username, image_url, description, goal_deadline) {
+function Vision (
+  username, image_url, description,
+  goal_deadline, image_author,image_author_url) {
+
   this.username = username;
-  this.image_url - image_url;
+  this.image_url = image_url;
   this.description = description;
   this.goal_deadline = goal_deadline;
+  this.image_author = image_author;
+  this.image_author_url = image_author_url;
 }
-function createVisionList (object) {
+function createVisionList (object,username) {
   return object.map(image => {
-  return image.urls.regular;
-  })
+    return new Vision(username, image.urls.regular, "", "", image.user.name,
+                    image.user.portfolio_url  )
+                    })
 }
 //#endregion
 //#region Quote Functions
