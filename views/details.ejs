@@ -19,10 +19,10 @@
             <label>Modify your visions, set a deadline, or remove your goals from your board</label>
             <!-- DESCRIPTION -->
             <input class="update-input" id="large-msg-box" type="textarea" placeholder="Add a description">
-            <input class="update-input" type="date">
+            <input class="update-input" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31">
             <!-- DEADLINE -->
             <div class="deadline-checkbox">
-              <input class="update-input" type="checkbox" id="complete">
+              <!-- <input class="update-input" type="checkbox" id="complete"> -->
               <label id="complete" for="complete">Goal Achieved</label>
             </div>
           </div>
