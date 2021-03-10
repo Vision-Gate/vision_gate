@@ -15,11 +15,11 @@
     <h1>USERBOARD</h1>
             <!--DROP DOWN FORM-->
     <div class="drop-down">
-      <form action="/userboard" method="GET">
+      <form action="/userboard" method="POST">
         <select action='/userboard' name="choice" class="drop-down-form">
         <option name='username' value="default" selected>Choose a User</option>
-        <% visionQuery.userList.forEach(user => { %>
-          <option name="username" value= <%= user.username %> > <%= user.username %> </option>  <% }) %>
+        <% visionQuery.combinedUsers.forEach(user => { %>
+          <option name="username" value= <%= user %> > <%= user %> </option>  <% }) %>
         </select>
         <input type="submit" class="drop-down-button">
       </form>
