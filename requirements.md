@@ -1,5 +1,3 @@
-Minimum Length: 3-5 sentences
-
 What is the vision of this product? To enable a user to research, create and control their ideas for the future. A user can explore the muriad of options we have available, select what interests them most and then save these options to a personalized board that shows them what they chose. 
 
 What pain point does this project solve? The ability to have a visual representation of the user's goals, with the functionality to give deadlines for accountability. This will create a catered experience for the user, and showcase what they really want out of life. 
@@ -43,7 +41,8 @@ A user can search all of the products in the inventory.
 A user will be able to revisit the site and be able to retrieve their selections. 
 
 Data Flow
-Describe the flow of data in your application. Write out what happens from the time the user begins using the app to the time the user is done with the app. Think about the “Happy Path” of the application. Describe through visuals and text what requests are made, and what data is processed, in addition to any other details about how the user moves through the site.
+
+![WRRC](public/img/WRRC.png)
 
 Non-Functional Requirements (301 & 401 only)
 Non-functional requirements are requirements that are not directly related to the functionality of the application but still important to the app.
