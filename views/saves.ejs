@@ -8,5 +8,18 @@
 </head>
 <body>
   <h1>SAVES.EJS</h1>
+
+  <% visionQuery.visionList.forEach(image => { %>
+
+    <img src="<%= image %>" alt=""> 
+    
+    <form action="/newentry" method="POST">
+      <input type="text" hidden name="image" value="<%= image %>">
+      <input type="text" hidden name="username" value="<%= visionQuery.query.username %>">
+      <input type="submit" value="save">
+    </form>
+  <% }) %>
+
+
 </body>
 </html>

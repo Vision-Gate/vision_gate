@@ -8,5 +8,24 @@
 </head>
 <body>
   <h1>USERBOARD.EJS</h1>
+  
+  <form action="/userboard" method="GET">
+  <select action='/userboard' name="choice">
+    <option name='username' value="default" selected>Choose a User</option>
+    <% visionQuery.userList.forEach(user => { %>
+      <option name="username" value= <%= user.username %> > <%= user.username %> </option>  <% }) %>
+  </select>
+  <input type="submit">
+  </form>
+
+  <% visionQuery.visionList.forEach(image => { %>
+    <img src="<%= image.image_url %>" alt="">     
+    <input type="text" hidden name="image" value="<%= image.image_url %>">
+    <input type="text" hidden name="username" value="<%= visionQuery.username %>">
+    <input type="submit" value="details">
+  <% }) %>
+
+
+  
 </body>
 </html>
