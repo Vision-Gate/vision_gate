@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="./styles/base.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vision Gate</title>
-  <link rel="stylesheet" href="./styles/base.css">
 </head>
 
 <body class="home">
@@ -23,9 +23,15 @@
         </fieldset>
       </form>
     </div>
-    <div>
+    <div class="quote">
       <h2> "<%= quote.quote %>" </h2>
       <h3> - <%= quote.author %></h3>
+    </div>
+    <div class="vision-board-about">
+      <h4>What is a Vision Board?</h4>
+      <p>A vision board is a visualization tool made up of inspirational pictures and words that are in alignment with your goals and dreams. Traditionally vision boards are a collage made with cork or poster boards so you can hang them up easily. By looking at visual representations of your aspirations each day you’re more easily able to achieve your goals. When you have a visual representation of your goals right in front of you, it becomes easier to embody the feeling of your dreams already being true. </p>
+      <p>Vision Gate enables you to create your vision board in a digital space. You can keep your vision board open on your computer through the day as you work and revisit it to stay in alignment with your goals. You can view your vision board on your mobile device when you are on the go. The practice of visualization is powerful in creating self motivation and focus. </p>
+      <p>To get started, simply create an account. Then search for keywords that connect back to your dreams and aspirations such as travel, dream home, finance, health, romance, or career goals. Pin your favorite photos to your very own digital vision board. Edit your images with a description and a deadline to stay on track. Mark your goals as complete once you have accomplished them.</p>
     </div>
   </main>
   <%- include('./layout/footer.ejs') %>

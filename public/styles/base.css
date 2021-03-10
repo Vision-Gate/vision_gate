@@ -6,19 +6,19 @@ body{
   height: 100vh;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  background-color: #c0c0c0;
+  background-color: #fff;
 }
 
 /*===== Home Page Background & Animations =====*/
 .home{
   margin: 0;
   padding: 0;
-  background: no-repeat top center;
+  background: no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  animation: animate 40s ease-in-out infinite;
+  animation: animate 35s ease-in-out infinite;
 }
 
 @keyframes animate{
@@ -54,7 +54,7 @@ body{
 
 .navbar a{
   text-decoration: none;
-  color: white;
+  color: #fff;
   width: 100px;
   display: block;
   padding: 25px 20px;
@@ -73,6 +73,7 @@ h1 {
   text-align: center;
   color: black;
   text-shadow: 0 0 3px #ffffff;
+  margin: 50px;
 }
 
 h2 {
@@ -85,8 +86,14 @@ h2 {
 h3 {
   text-align: center;
   color: whitesmoke;
-  text-shadow: 0 0 10px #040255;
+  text-shadow: 0 0 10px black;
   font-style: italic;
+}
+
+h4{
+  color: rgb(34, 34, 34);
+  text-shadow: rgb(255, 255, 255) 1px 0 10px;
+  font-size: 20px;
 }
 
 h5 {
@@ -124,30 +131,32 @@ label {
 .input-fields {
   display: flex;
   flex-direction: column;
-  margin-right: 4%;
-  width: 90%;
+  align-items: center;
 }
 
 .input {
   margin: 10px 0;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #fff;
   padding: 10px;
-  color: white;
+  color: #fff;
   width: 100%;
 }
 
 ::-webkit-input-placeholder{
-  color: white;
+  color: #fff;
+  font-style: italic;
 }
 
 ::-moz-input-placeholder{
-  color: white;
+  color: #fff;
+  font-style: italic;
 }
 
 ::-ms-input-placeholder{
-  color: white;
+  color: #fff;
+  font-style: italic;
 }
 
 .button {
@@ -161,7 +170,23 @@ label {
   text-transform: uppercase; 
 }
 
-/*===== Mobile =====*/
+/*===== Home Page Bottom Text =====*/
+.quote{
+  margin: 50px;
+}
+
+.vision-board-about {
+  padding: 50px;
+  margin: 0;
+  background-color: rgba(192, 192, 192, 0.8);
+}
+
+.vision-board-about p{
+  color: rgb(0, 0, 0);
+  text-shadow: rgb(255, 255, 255) 1px 0 10px;
+}
+
+/*===== Mobile Home Page Form =====*/
 @media screen and (max-width: 600px) {
   .search-form{
     flex-direction: column;
@@ -172,18 +197,23 @@ label {
 }
 
 /*===== Details Page Background & Form =====*/
+.update-main {
+  min-height: 100%;
+}
+
 .details-page {
   margin: 0;
   padding: 0;
-  background: url('/img/img7.jpg') no-repeat top center;
+  background: url('/img/img7.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 .update-wrapper{
-  position: absolute;
   width: 100%;
 }
 
@@ -242,22 +272,22 @@ input#complete.update-input {
   margin: 10px 0;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #fff;
   padding: 10px;
   color: white;
   width: 80%;
 }
 
 ::-webkit-input-placeholder{
-  color: white;
+  color: #fff;
 }
 
 ::-moz-input-placeholder{
-  color: white;
+  color: #fff;
 }
 
 ::-ms-input-placeholder{
-  color: white;
+  color: #fff;
 }
 
 .button {
@@ -265,20 +295,199 @@ input#complete.update-input {
   text-align: center;
   padding: 15px 0 15px 0;
   margin: 10px 0 10px 0;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 3px black solid;
   color: #fff;
+  cursor: pointer;
+  text-transform: uppercase; 
+  width: 100%;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.button:hover {
+  background: rgb(156, 165, 168);
+  text-align: center;
+  padding: 15px 0 15px 0;
+  margin: 10px 0 10px 0;
+  border-radius: 10px;
+  border: 3px black solid;
+  color: black;
   cursor: pointer;
   text-transform: uppercase; 
   width: 100%;
   justify-content: center;
 }
 
+/*===== User board dropdown form =====*/
+.drop-down{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.drop-down-form{
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  border: 3 solid black;
+}
+
+.drop-down-button{
+  background: rgb(0, 0, 0);
+  text-align: center;
+  border-radius: 5px;
+  border: 3px solid black;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase; 
+  transition: 0.5s;
+  width: 200px;
+  height: 30px;
+}
+
+.drop-down-button:hover {
+  background: rgb(72, 145, 173);
+  text-align: center;
+  border-radius: 5px;
+  border: 3px solid black;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase; 
+  width: 200px;
+  height: 30px;
+}
+
+/*===== User board Masonry Grid =====*/
+.grid-item { 
+  width: 400px; 
+}
+
+.grid-item img {
+  width: 100%;
+}
+
+.grid {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/*===== User board hover text =====*/
+.grid .grid-item {
+  display: inline-block;
+  margin-bottom: 10px;
+  text-align: left;
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, .05);
+}
+.grid .grid-item:before {
+  content: '';
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+  width: 100%;
+  height: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  transition-property: top, opacity;
+  transition-duration: 0.3s;
+}
+.grid .grid-item img {
+  display: block;
+  max-width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.grid .grid-item .details {
+  font-size: 16px;
+  padding: 20px;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
+.grid .grid-item .details span {
+  display: block;
+  opacity: 0;
+  position: relative;
+  top: 100px;
+  transition-property: top, opacity;
+  transition-duration: 0.3s;
+  transition-delay: 0s;
+}
+.grid .grid-item .details .title {
+  line-height: 1;
+  font-weight: 600;
+  font-size: 18px;
+}
+.grid .grid-item .details .info {
+  line-height: 1.2;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.grid .grid-item:focus:before, .grid .grid-item:hover:before, .grid .grid-item:focus span, .grid .grid-item:hover span {
+  opacity: 1;
+}
+.grid .grid-item:focus:before, .grid .grid-item:hover:before {
+  top: 50%;
+}
+.grid .grid-item:focus span, .grid .grid-item:hover span {
+  top: 0;
+}
+.grid .grid-item:focus .title, .grid .grid-item:hover .title {
+  transition-delay: 0.15s;
+}
+.grid .grid-item:focus .info, .grid .grid-item:hover .info {
+  transition-delay: 0.25s;
+}
+
+/*===== Searches =====*/
+.search-container {
+  margin-bottom: 40px;
+}
+
+.search-width {
+  width: 60%;
+}
+
+.pin-button {
+  background: rgb(0, 0, 0);
+  text-align: center;
+  font-size: large;
+  border-radius: 10px;
+  width: 30%;
+  height: 50px;
+  margin: 5px;
+  border: 3px solid black;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase; 
+  transition: 0.5s;
+}
+
+.pin-button:hover {
+  background: rgb(72, 145, 173);
+  text-align: center;
+  font-size: large;
+  border-radius: 10px;
+  width: 30%;
+  height: 50px;
+  margin: 5px;
+  border: 3px solid black;
+  color: black;
+  cursor: pointer;
+  text-transform: uppercase; 
+}
 /*===== Footer =====*/
 footer{
   background-color: rgba(0, 0, 0, 0.6);
   width: 100vw;
-  color: white;
-  position: absolute;
+  color: #fff;
   bottom: 0;
 }
 
@@ -290,10 +499,13 @@ footer{
   justify-content: center;
   text-align: center;
   flex-direction: column;
+  padding-bottom: 50px;
 }
 
 .footer-wrapper p{
   font-size: 12px;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-wrapper a{
