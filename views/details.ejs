@@ -8,5 +8,14 @@
 </head>
 <body>
   <h1>DETAILS.EJS</h1>
+
+  <form action="<%= /details/:user/:id %>?_method=PUT" method="POST">
+    <img src="<%= image %>" alt="">
+    <button type="submit" value="update">Update Information</button>
+  </form>>
+  <form action="<%= /details/:user/:id %>?_method=DELETE" method="POST">
+    <img src="<%= image %>" alt="">
+    <button type="submit" value="delete">Delete</button>
+  </form>>
 </body>
 </html>

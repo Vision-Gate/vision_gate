@@ -22,12 +22,13 @@ const UNSPLASH_KEY = process.env.UNSPLASH_KEY
 
 //Routes
 app.get('/', displayHomePage);
-app.get('/userboard', displayUserboard);
+app.get('/userboard', populateDefaultUsers);
 app.get('/details/:user/:id', displayDetails);
 app.get('/about_us', displayAboutUs);
-app.get('/saves/:keyword', displaySearchResults)
+app.get('/saves', displaySearchResults)
 
-app.post('/categories', conductSearch);
+app.post('/search', conductSearch);
+// app.post('/userboard',displayUserboard);
 app.post('/newentry', addToBoard);
 
 app.delete('/details/:user/:id', deleteEntry);
@@ -45,8 +46,49 @@ function displayHomePage(req, res) {
     })
 }
 
-function displayUserboard(req, res) {
-  res.render('./userboard.ejs')
+function populateDefaultUsers(req,res){
+  const sqlString = 'SELECT * FROM visions WHERE username=$1;';
+  const sqlArr = ['default'];
+  client.query(sqlString,sqlArr)
+  .then(result => 
+  {
+    console.log(`Displaying visions for ${result.rows[0].username} user`);
+    const visionList = result.rows;
+    const userList= [];
+    result.rows.map(user =>{
+      if(!userList.includes(user.username)){
+        userList.push(user.username);
+      }
+    });
+    console.log(userList);
+    const ejsObj = {visionQuery: {userList,visionList}};
+    res.render('./default_board.ejs',ejsObj);
+  })
+}
+//Populate Saved Images
+function populateUsers(req, res) {
+  //User is whatever is currently selected
+  // const sqlUsers = 'SELECT DISTINCT username FROM users;';
+  // const sqlUsersArr = [];
+  // client.query(sqlUsers)
+  // .then(userResults => 
+  // {
+  //     console.log(userResults);
+  //     console.log(`Users: ${userResults.rows[0]}`);
+      console.log(req.body);
+      const sqlString = 'SELECT * FROM visions WHERE username=$1;';
+      const sqlArr = ['drae'];
+      client.query(sqlString,sqlArr)
+      .then(result => 
+      {
+        console.log(result.rows);
+        console.log(`Displaying visions for ${result.rows}`);
+        const visionList = result.rows;
+        // const userList = userResults.rows;
+        // const ejsObj = {visionQuery: {userList,visionList}};
+        res.render('./userboard.ejs');
+      })
+  // })
 }
 
 function displayDetails(req, res) {
@@ -54,27 +96,32 @@ function displayDetails(req, res) {
 }
 
 function displaySearchResults(req, res) {
+  res.render('./saves.ejs');
 }
-
 function conductSearch(req, res) {
-  console.log(req.body, req.body.search_query);
+  
+  console.log(req.body.username, req.body.search_query);
+  const sqlStr = 'INSERT INTO users(username) VALUES($1);';
+  const sqlArr = [req.body.username];
+  client.query(sqlStr,sqlArr).then(console.log(`Added ${req.body.username} to Users`));
+  
   const url = `https://api.unsplash.com/search/photos?query=${req.body.search_query}&client_id=${UNSPLASH_KEY}`;
   superagent.get(url)
     .then(results => {
       const visionList = new createVisionList(results.body.results);
-      console.log(visionList);
+      // console.log(visionList);
       const query = req.body
       const ejsObject = {visionQuery: {visionList, query}};
       res.render('./saves.ejs', ejsObject);
     })
-  
-  // res.redirect('/saves')
 }
-
 function addToBoard(req, res) {
-  
+  const sqlStr = 'INSERT INTO visions(image_url,username) VALUES($1,$2) RETURNING id;';
+  const sqlArr = [req.body.image,req.body.username];
+  client.query(sqlStr,sqlArr)
+  .then(result =>{ console.log(`Added Entry to the DB`)})
+  .catch(error => res.send("Something went wrong: ", error));
 }
-
 
 function deleteEntry(req, res) {
   
@@ -87,7 +134,6 @@ function updateEntry(req, res) {
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
 }
-
 
 // Image functions
 function Vision (username, image_url, description, goal_deadline) {
