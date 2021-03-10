@@ -31,7 +31,7 @@ app.post('/userboard',displayUsersboard);
 app.post('/newentry', addToBoard);
 
 app.delete('/details/:id', deleteEntry);
-app.put('/details/:user/:id', updateEntry);
+app.put('/details/:id', updateEntry);
 //#endregion
 //#region Route Callbacks
 function displayHomePage(req, res) {
@@ -152,7 +152,7 @@ function updateEntry(req, res) {
   const sqlArr = [req.body.description, req.body.deadline, req.params.id];
   client.query(sqlStr, sqlArr)
     .then
-    (res.redirect('./userboard.ejs')) // add specific username extension with 140, 141?
+    (res.redirect('/userboard'))
 }
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
