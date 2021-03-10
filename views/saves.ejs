@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <link rel="stylesheet" href="./styles/base.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
 <body>
-  <h1>SAVES.EJS</h1>
-
+  <%- include('./layout/header.ejs') %>
+  <main>
+  <h1>SEARCH RESULTS</h1>
+  <div class ="grid">
   <% visionQuery.visionList.forEach(image => { %>
-
-    <img src="<%= image %>" alt=""> 
-    
-    <form action="/newentry" method="POST">
-      <input type="text" hidden name="image" value="<%= image %>">
-      <input type="text" hidden name="username" value="<%= visionQuery.query.username %>">
-      <input type="submit" value="save">
-    </form>
+      <div class="search-container">
+        <img src="<%= image %>" alt="my search" class="search-width"> 
+        <form action="/newentry" method="POST">
+          <input type="text" hidden name="image" value="<%= image %>">
+          <input type="text" hidden name="username" value="<%= visionQuery.query.username %>">
+          <input type="submit" value="pin" class="pin-button">
+        </form>
+      </div>
   <% }) %>
-
-
+  </div>
+  </main>
+  <%- include('./layout/footer.ejs') %>
+  <script src="app.js"></script>
 </body>
 </html>
