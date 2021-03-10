@@ -9,11 +9,13 @@
 <body>
   <h1>USERBOARD.EJS</h1>
   
-  <form action="/userboard" method="GET">
+  <form action="/userboard" method="POST">
   <select action='/userboard' name="choice">
     <option name='username' value="default" selected>Choose a User</option>
     <% visionQuery.userList.forEach(user => { %>
-      <option name="username" value= <%= user.username %> > <%= user.username %> </option>  <% }) %>
+      <option name="username" value= "<%= user %>" > 
+        <%= user %> 
+      </option>  <% }) %>
   </select>
   <input type="submit">
   </form>
