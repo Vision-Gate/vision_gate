@@ -97,6 +97,7 @@ function displayUsersboard(req, res) {
   .catch(error => handleError(error,res));
 }
 function displayDetails(req, res) {
+
   res.render('./details.ejs')
 }
 function displaySearchResults(req, res) {
@@ -124,9 +125,21 @@ function addToBoard(req, res) {
   .catch(error => handleError(error,res));
 }
 function deleteEntry(req, res) {
-  
+  console.log('in the delete function');
+  const sqlString = 'DELETE FROM visions WHERE id=$1;';
+  const sqlArr = [req.params.id];
+  client.query(sqlString, sqlArr)
+    .then(res.redirect('./userboard.ejs'))
 }
 function updateEntry(req, res) {
+  console.log('in the update function', req.body);
+  const sqlStr = 'UPDATE visions SET description=$1, deadline=$2 WHERE id=$3;'; //need image to transfer id when brought to details page
+  const sqlArr = [req.body.description, req.body.deadline, req.params.id];
+  client.query(sqlStr, sqlArr)
+    .then
+    // let user = req.params.username;
+    // let id = req.params.id;
+    (res.redirect('./userboard.ejs')) // add specific username extension with 140, 141?
 }
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
