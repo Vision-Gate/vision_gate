@@ -4,25 +4,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Vision Gate</title>
   <link rel="stylesheet" href="./styles/base.css">
 </head>
-<body>
-  <h1>WELCOME TO VISION GATE</h1>
-  <div class="wrapper">
-    <form class="search-form" action="/categories" method="POST">
-      <fieldset class="input-fields">
-        <label>Create your very own vision board. Entry your username or create an account below. Then search for keywords that align with your goals such as travel, romance, finance, etc.</label>
-      <input class="input" type="text" name="username" placeholder="Your username" value="">
-      <input class="input" type="text" name="search_query"  placeholder="Vision search">
-      <input class="button" type="submit" value="search">
-      <input class="button" type="submit" value="My Board">
-      </fieldset>
-    </form>
-  </div>
-  <div>
-    <h2> <%= quote.quote %> </h2>
-    <h3> <%= quote.author %></h3>
-  </div>
+<body class="home">
+  <%- include('./layout/header.ejs') %>
+  <main>
+    <h1>WELCOME TO VISION GATE</h1>
+    <div class="wrapper">
+      <form class="search-form" action="/categories" method="POST">
+        <fieldset class="input-fields">
+          <label>Create your very own vision board. Enter your username or create an account below. Then search for keywords that align with your goals such as travel, romance, finance, etc.</label>
+            <input class="input" type="text" name="username" required placeholder="Your username" value="">
+            <input class="input" type="text" name="search_query" required placeholder="Vision search">
+            <input class="button" type="submit" value="search">
+            <input class="button" type="submit" value="My Board">
+        </fieldset>
+      </form>
+    </div>
+    <div>
+      <h2> "<%= quote.quote %>" </h2>
+      <h3> - <%= quote.author %></h3>
+    </div>
+  </main>
+  <%- include('./layout/footer.ejs') %>
 </body>
 </html>
