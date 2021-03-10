@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>DETAILS.EJS</h1>
-
-  <form action="<%= /details/:user/:id %>?_method=PUT" method="POST">
-    <img src="<%= image %>" alt="">
-    <button type="submit" value="update">Update Information</button>
-  </form>>
-  <form action="<%= /details/:user/:id %>?_method=DELETE" method="POST">
-    <img src="<%= image %>" alt="">
-    <button type="submit" value="delete">Delete</button>
-  </form>>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DETAILS</title>
+    <link rel="stylesheet" href="/styles/base.css">
+  </head>
+<body class="details-page">
+  <%- include('./layout/header.ejs') %>
+  <main>
+    <h1>UPDATE YOUR PIN</h1>
+    <div class="update-wrapper">
+            <!-- ACTION & METHOD-->
+      <form class="update-form" action="/categories" method="POST"> 
+        <fieldset class="update-input-fields">
+          <div class="update-left">
+            <label>Modify your visions, set a deadline, or remove your goals from your board</label>
+            <!-- DESCRIPTION -->
+            <input class="update-input" id="large-msg-box" type="textarea" placeholder="Add a description">
+            <input class="update-input" type="date">
+            <!-- DEADLINE -->
+            <div class="deadline-checkbox">
+              <input class="update-input" type="checkbox" id="complete">
+              <label id="complete" for="complete">Goal Achieved</label>
+            </div>
+          </div>
+          <div class="update-right">
+                <!-- IMAGE -->
+            <img src="/img/img3.jpg" class="update-img"/>
+                <!-- BUTTONS-->
+            <input class="button" type="submit" value="Update">
+            <input class="button" type="submit" value="Delete">
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+  <%- include('./layout/footer.ejs') %>
 </body>
 </html>
