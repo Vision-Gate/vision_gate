@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 //#region Dependencies
 require('dotenv').config();
 const express = require('express');
@@ -205,4 +207,21 @@ client.connect()
   .then( () => {
     app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`))
   })
+//#endregion
+
+//#region Music Stuff
+const API_KEY = "2e07f92540msh22e32b4e37ec99fp1dc086jsn7162f9a1ea9e";
+const API_URL = "https://deezerdevs-deezer.p.rapidapi.com/search";
+// "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+// "useQueryString": true
+const unirest = require('unirest');
+unirest.get(API_URL)
+.headers("X-RapidAPI-key", API_KEY)
+.query({
+    "q": "eye of the tiger"
+  })
+.end(function (res) {
+    console.log(res.body);
+  })
+
 //#endregion
