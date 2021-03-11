@@ -13,7 +13,8 @@
   <main>
     <h1>WELCOME TO VISION GATE</h1>
     <div class="wrapper">
-      <form class="search-form" action="/search" method="POST">
+      <div class="search-form">
+        <form action="/search" method="POST">
         <fieldset class="input-fields">
           <label>Create your very own vision board. Enter your username or create an account below. Then search for keywords that align with your goals such as travel, romance, finance, etc.</label>
             <input class="input" type="text" name="username" required placeholder="Your username" value="">
@@ -21,10 +22,13 @@
             <input class="button" type="submit" value="search">
           </fieldset>
         </form>
-        <form class="search-form" action="/userboard" method="POST">
-          <input class="button" type="submit" value="My Board">
-          <input type="text" hidden name="username" name=" <%= hpElements.users[0].username %>">
+        <form action="/userboard" method="POST">
+          <fieldset class="input-fields">
+            <input class="button" type="submit" value="My Board">
+            <input type="text" hidden name="username" name=" <%= hpElements.users[0].username %>">
+          </fieldset>
         </form>
+      </div>
     </div>
     <div class="quote">
       <h2> "<%= hpElements.quote.quote %>" </h2>
@@ -38,6 +42,5 @@
     </div>
   </main>
   <%- include('./layout/footer.ejs') %>
-
 </body>
 </html>
