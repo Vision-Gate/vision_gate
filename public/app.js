@@ -140,4 +140,27 @@ function remainingDays() {
   // document.querySelector('#setDate').hidden = true;
   // document.getElementById('complete').hidden = false;
 }
-  //#endregion
+
+//#endregion
+//#region music function
+console.log('connected to app.js');
+
+  // var req = unirest("GET", "https://deezerdevs-deezer.p.rapidapi.com/search");
+  // req.query({
+  //   "q": "eyeofthetiger"
+  // });
+  
+  // req.headers({
+  //   "x-rapidapi-key": "2e07f92540msh22e32b4e37ec99fp1dc086jsn7162f9a1ea9e",
+  //   "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+  //   "useQueryString": true
+  // });
+  
+  
+  // req.end(function (res) {
+  //   if (res.error) throw new Error(res.error);
+  
+  //   console.log(res.body);
+  // });
+//#endregion 
+

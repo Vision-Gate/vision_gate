@@ -12,7 +12,7 @@
 <body>
   <%- include('./layout/header.ejs') %>
   <main>
-    <h1>MY VISION BOARD</h1>
+    <h1 id="theme-header">MY VISION BOARD</h1>
     <div class="drop-down">
       <form action="/userboard" method="POST">
       <select action='/userboard' name="choice" class="drop-down-form">
@@ -20,9 +20,13 @@
         <% visionQuery.userList.forEach(user => { %>
           <option name="username" value= <%= user %> > <%= user %> </option>  <% }) %>
       </select>
-      <input type="submit" class="drop-down-button">
+      <input type="submit" class="drop-down-button" id="theme-button">
       </form>
     </div>
+    <div class="center-button">
+      <button class="toggle-button" id="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
+    </div>
+
     <div class ="grid">
       <% visionQuery.visionList.forEach(image => { %>
         <form action="/details" method="POST" type="submit">
@@ -37,11 +41,23 @@
             <input type="text" hidden name="id" value="<%= image.id %>">
           </div> 
         </button>
-            <!-- <input type="submit" value="details"> -->
         </form>
     <% }) %>
+    </div>
   </main>
   <%- include('./layout/footer.ejs') %>
   <script src="app.js"></script>
+  <script>
+    function toggleTheme() {
+      let element = document.body;
+      let element2 = document.getElementById("theme-header")
+      let element3 = document.getElementById("theme-button")
+      let element4 = document.getElementById("theme-toggle")
+      element.classList.toggle("dark-mode");
+      element2.classList.toggle("dark-mode");
+      element3.classList.toggle("dark-mode");
+      element4.classList.toggle("dark-mode");
+    }
+  </script>
 </body>
 </html>
