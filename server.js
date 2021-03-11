@@ -22,7 +22,7 @@ const UNSPLASH_KEY = process.env.UNSPLASH_KEY
 //#region Routes
 app.get('/', displayHomePage);
 app.get('/userboard', populateDefaultUserboard);
-app.get('/details/:user/:id', displayDetails);
+app.post('/details', displayDetails);
 app.get('/about_us', displayAboutUs);
 app.get('/saves', displaySearchResults)
 
@@ -30,8 +30,8 @@ app.post('/search', conductSearch);
 app.post('/userboard',displayUsersboard);
 app.post('/newentry', addToBoard);
 
-app.delete('/details/:user/:id', deleteEntry);
-app.put('/details/:user/:id', updateEntry);
+app.delete('/details/:id', deleteEntry);
+app.put('/details/:id', updateEntry);
 //#endregion
 //#region Route Callbacks
 function displayHomePage(req, res) {
@@ -39,7 +39,6 @@ function displayHomePage(req, res) {
   superagent.get(url)
     .then(resultsFromAPI => {
       const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
-      console.log(quote)
       const ejsObject = {quote};
       res.render('./index.ejs', ejsObject);
     })
@@ -85,7 +84,11 @@ function displayUsersboard(req, res) {
     const sqlArr = [req.body.choice];
     const userList = [];
     savedUserResult.rows.map(user =>{if(!userList.includes(user.username))
-      {userList.push(user.username);} });
+      {
+        userList.push(user.username);
+        userList.push(user.id);
+      } 
+    });
     client.query(sqlString,sqlArr)
     .then(visionResult => 
     {
@@ -97,7 +100,14 @@ function displayUsersboard(req, res) {
   .catch(error => handleError(error,res));
 }
 function displayDetails(req, res) {
-  res.render('./details.ejs')
+  const sqlStr = `SELECT * FROM visions WHERE id=$1;`;
+  const sqlArr= [req.body.id];
+  client.query(sqlStr,sqlArr)
+  .then(result =>{
+    const user = [result.rows[0]];
+    const ejsObj = {visionList:user};
+    res.render('./details.ejs',ejsObj);
+  })
 }
 function displaySearchResults(req, res) {
   res.render('./saves.ejs');
@@ -109,7 +119,8 @@ function conductSearch(req, res) {
   const url = `https://api.unsplash.com/search/photos?query=${req.body.search_query}&client_id=${UNSPLASH_KEY}`;
   superagent.get(url)
   .then(results => {
-      const visionList = new createVisionList(results.body.results);
+      const visionList = new createVisionList(results.body.results,req.body.username);
+      console.log(visionList);
       const query = req.body
       const ejsObject = {visionQuery: {visionList, query}};
       res.render('./saves.ejs', ejsObject);
@@ -117,16 +128,30 @@ function conductSearch(req, res) {
   .catch(error => handleError(error,res));
 }
 function addToBoard(req, res) {
-  const sqlStr = 'INSERT INTO visions(image_url,username) VALUES($1,$2) RETURNING id;';
-  const sqlArr = [req.body.image,req.body.username];
+  const sqlStr = 'INSERT INTO visions(image_url,username,author,author_url) VALUES($1,$2,$3,$4) RETURNING id;';
+  const sqlArr = [req.body.image, req.body.username, req.body.image_author, req.body.image_author_url];
   client.query(sqlStr,sqlArr)
   .then(result =>{ console.log(`Added Entry to the DB`)})
   .catch(error => handleError(error,res));
 }
 function deleteEntry(req, res) {
-  
+  console.log('in the delete function');
+  console.log(req.params.id)
+  const sqlString = 'DELETE FROM visions WHERE id=$1;';
+  const sqlArr = [req.params.id];
+  client.query(sqlString, sqlArr)
+    .then(results => {
+      console.log(results);
+      res.redirect('/userboard')
+    })
 }
 function updateEntry(req, res) {
+  console.log('in the update function', req.body);
+  const sqlStr = 'UPDATE visions SET description=$1, deadline=$2 WHERE id=$3;'; //need image to transfer id when brought to details page
+  const sqlArr = [req.body.description, req.body.deadline, req.params.id];
+  client.query(sqlStr, sqlArr)
+    .then
+    (res.redirect('/userboard'))
 }
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
@@ -136,32 +161,44 @@ function handleError(error,res){
 }
 //#endregion
 //#region Vision Constructors
-function Vision (username, image_url, description, goal_deadline) {
+function Vision (
+  username, image_url, description,
+  goal_deadline, image_author,image_author_url) {
+
   this.username = username;
-  this.image_url - image_url;
+  this.image_url = image_url;
   this.description = description;
   this.goal_deadline = goal_deadline;
+  this.image_author = image_author;
+  this.image_author_url = image_author_url;
 }
-function createVisionList (object) {
+function createVisionList (object,username) {
   return object.map(image => {
-  return image.urls.regular;
-  })
+    return new Vision(username, image.urls.regular, "", "", image.user.name,
+                    image.user.portfolio_url  )
+                    })
 }
 //#endregion
 //#region Quote Functions
-function Quote (quote, author) {
+function Quote (quote, id, author) {
   this.quote = quote;
+  this.id = id;
   this.author = author;
 }
 function createQuoteList (object) {
   return object.map (obj => {
-  return new Quote(obj.quote, obj.author);
+    const badIdx = [20, 29, 31, 28, 34, 13, 33];
+    let id;
+    if (!badIdx.includes(obj.id)) {
+      id = obj.id;
+    }
+  return new Quote(obj.quote, id, obj.author);
   });
 }
 function getRandomQuote (quoteList) {
   const idx = Math.floor(Math.random() * Math.floor(quoteList.length));
-  return quoteList[idx];
-}
+      return quoteList[idx];}
+
 //#endregion
 //#region Server | Database Connections
 client.connect()
