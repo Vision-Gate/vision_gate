@@ -46,7 +46,8 @@ function displayHomePage(req, res) {
         .then(results => {
           console.log(results.rows[0]);
           const users = results.rows;
-          const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
+          console.log(users);
+          const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));          
           const ejsObject = {hpElements:{quote, users}};
           res.render('./index.ejs', ejsObject);
         })
@@ -219,18 +220,18 @@ client.connect()
 //#endregion
 
 //#region Music Stuff
-const API_KEY = "2e07f92540msh22e32b4e37ec99fp1dc086jsn7162f9a1ea9e";
-const API_URL = "https://deezerdevs-deezer.p.rapidapi.com/search";
-// "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-// "useQueryString": true
-const unirest = require('unirest');
-unirest.get(API_URL)
-.headers("X-RapidAPI-key", API_KEY)
-.query({
-    "q": "eye of the tiger"
-  })
-.end(function (res) {
-    console.log(res.body);
-  })
+// const API_KEY = "2e07f92540msh22e32b4e37ec99fp1dc086jsn7162f9a1ea9e";
+// const API_URL = "https://deezerdevs-deezer.p.rapidapi.com/search";
+// // "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+// // "useQueryString": true
+// const unirest = require('unirest');
+// unirest.get(API_URL)
+// .headers("X-RapidAPI-key", API_KEY)
+// .query({
+//     "q": "eye of the tiger"
+//   })
+// .end(function (res) {
+//     console.log(res.body);
+//   })
 
 //#endregion
