@@ -17,6 +17,5 @@ CREATE TABLE users (
   username VARCHAR(255)
 );
 
--- psql -d table-name -f data/images_schema.sql;
--- psql -d table-name -f data/seed.sql;
--- psql -d table-name -f data/user_schema.sql;
+-- psql -d visions -f data/images_schema.sql;
+-- psql -d visions -f data/seed.sql;

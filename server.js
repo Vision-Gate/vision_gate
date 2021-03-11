@@ -137,11 +137,28 @@ function conductSearch(req, res) {
   })
   .catch(error => handleError(error,res));
 }
+// function pinRedirect (req, res, searchQuery, username) {
+//   const sqlStr = 'INSERT INTO users(username) VALUES($1);';
+//   const sqlArr = [req.body.username];
+//   client.query(sqlStr,sqlArr).then(console.log(`Added ${req.body.username} to Users`));
+//   const url = `https://api.unsplash.com/search/photos?query=${req.body.search_query}&client_id=${UNSPLASH_KEY}`;
+//   superagent.get(url)
+//   .then(results => {
+//       const visionList = new createVisionList(results.body.results,req.body.username);
+//       const query = req.body;
+//       const currentUsername = req.body.username;
+//       const ejsObject = {visionQuery: {visionList, query, currentUsername}};
+//       res.render('./saves.ejs', ejsObject);
+//   })
+//   .catch(error => handleError(error,res));
+// }
 function addToBoard(req, res) {
   const sqlStr = 'INSERT INTO visions(image_url,username,author,author_url) VALUES($1,$2,$3,$4) RETURNING id;';
   const sqlArr = [req.body.image, req.body.username, req.body.image_author, req.body.image_author_url];
   client.query(sqlStr,sqlArr)
-  .then(result =>{ console.log(`Added Entry to the DB`)})
+  .then(result =>{
+     console.log(`Added Entry to the DB`);
+    })
   .catch(error => handleError(error,res));
 }
 function deleteEntry(req, res) {
