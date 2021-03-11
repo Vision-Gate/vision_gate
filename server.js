@@ -31,7 +31,7 @@ app.post('/userboard',displayUsersboard);
 app.post('/newentry', addToBoard);
 
 app.delete('/details/:id', deleteEntry);
-app.put('/details/:user/:id', updateEntry);
+app.put('/details/:id', updateEntry);
 //#endregion
 //#region Route Callbacks
 function displayHomePage(req, res) {
@@ -39,7 +39,6 @@ function displayHomePage(req, res) {
   superagent.get(url)
     .then(resultsFromAPI => {
       const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
-      console.log(quote)
       const ejsObject = {quote};
       res.render('./index.ejs', ejsObject);
     })
@@ -152,7 +151,7 @@ function updateEntry(req, res) {
   const sqlArr = [req.body.description, req.body.deadline, req.params.id];
   client.query(sqlStr, sqlArr)
     .then
-    (res.redirect('./userboard.ejs')) // add specific username extension with 140, 141?
+    (res.redirect('/userboard'))
 }
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
@@ -181,19 +180,25 @@ function createVisionList (object,username) {
 }
 //#endregion
 //#region Quote Functions
-function Quote (quote, author) {
+function Quote (quote, id, author) {
   this.quote = quote;
+  this.id = id;
   this.author = author;
 }
 function createQuoteList (object) {
   return object.map (obj => {
-  return new Quote(obj.quote, obj.author);
+    const badIdx = [20, 29, 31, 28, 34, 13, 33];
+    let id;
+    if (!badIdx.includes(obj.id)) {
+      id = obj.id;
+    }
+  return new Quote(obj.quote, id, obj.author);
   });
 }
 function getRandomQuote (quoteList) {
   const idx = Math.floor(Math.random() * Math.floor(quoteList.length));
-  return quoteList[idx];
-}
+      return quoteList[idx];}
+
 //#endregion
 //#region Server | Database Connections
 client.connect()
