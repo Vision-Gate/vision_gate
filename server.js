@@ -34,6 +34,9 @@ app.post('/newentry', addToBoard);
 
 app.delete('/details/:id', deleteEntry);
 app.put('/details/:id', updateEntry);
+
+app.get('*', handleRandomError);
+
 //#endregion
 //#region Route Callbacks
 function displayHomePage(req, res) {
@@ -47,25 +50,27 @@ function displayHomePage(req, res) {
   })
   .catch(error => console.log("Something went wrong: ",error));
   superagent.get(url)
-    .then(resultsFromAPI => {
-      const sqlString = 'SELECT * FROM users;';
-      const sqlArray = [];
-      client.query(sqlString, sqlArray)
-        .then(results => {
-          console.log("From displayHomePage: " + results.rows[0]);
-          const users = results.rows;
-          console.log(users);
-          const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));          
-          const ejsObject = {hpElements:{quote, users}};
-          res.render('./index.ejs', ejsObject);
+  .then(resultsFromAPI => {
+    const sqlString = 'SELECT * FROM users;';
+    const sqlArray = [];
+    client.query(sqlString, sqlArray)
+    .then(results => {
+      console.log("From displayHomePage: " + results.rows[0]);
+      const users = results.rows;
+      console.log(users);
+      const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));          
+      const ejsObject = {hpElements:{quote, users}};
+      res.render('./index.ejs', ejsObject);
         })
     })
+    .catch(error => handleError(error, res))
 }
 function populateDefaultUserboard(req,res){
   const sqlString = 'SELECT * FROM visions WHERE username=$1;';
   const sqlArr = ['default'];
   client.query(sqlString,sqlArr)
   .then(result => {  includeSavedUsersToDropdown(result.rows,res);  })
+  .catch(error => handleError(error,res));
 }
 function includeSavedUsersToDropdown(visionList,res){
   const sqlStr = 'SELECT * FROM users;';
@@ -82,6 +87,7 @@ function includeSavedUsersToDropdown(visionList,res){
     const ejsObj = {visionQuery: {combinedUsers,visionList}};
     res.render('./default_board.ejs',ejsObj);
   })
+  .catch(error => handleError(error,res));
 }
 function displayUsersboard(req, res) {
   const sqlUserString = 'SELECT * FROM users;';
@@ -115,6 +121,7 @@ function displayDetails(req, res) {
     const ejsObj = {visionList:user};
     res.render('./details.ejs',ejsObj);
   })
+  .catch(error => handleError(error,res));
 }
 function displaySearchResults(req, res) {
   res.render('./saves.ejs');
@@ -164,9 +171,13 @@ function updateEntry(req, res) {
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
 }
-function handleError(error,res){
-  res.status(500).send("Something went wrong. ",error)
+function handleError(error,res) {
+  res.status(500).send('something went wrong', error);
 }
+function handleRandomError(req, res) {
+  res.status(404).render('./errors.ejs');
+}
+
 //#endregion
 //#region Vision Constructors
 function Vision (

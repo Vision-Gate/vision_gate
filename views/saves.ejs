@@ -13,6 +13,12 @@
   <main>
   <h1>SEARCH RESULTS</h1>
   <div class ="grid">
+    <% if (visionQuery.visionList.length === 0) { %>
+      <h3>NO SEARCH RESULTS FOUND STUPID</h3>
+      <div class="search-container">
+        <img src="img/img8.jpg" class="search-width"> 
+      </div>
+    <% } else { %>
   <% visionQuery.visionList.forEach(image => { %>
       <div class="search-container">
         <img src="<%= image.image_url %>" alt="my search" class="search-width"> 
@@ -24,7 +30,7 @@
           <input type="submit" value="pin" class="pin-button">
         </form>
       </div>
-  <% }) %>
+  <% }) } %>
   </div>
   </main>
   <%- include('./layout/footer.ejs') %>
