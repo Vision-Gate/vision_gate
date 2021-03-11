@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "pg": "^8.5.1",
-    "superagent": "^6.1.0"
+    "superagent": "^6.1.0",
+    "unirest": "^0.6.0"
   }
 }
