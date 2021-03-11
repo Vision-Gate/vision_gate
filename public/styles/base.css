@@ -369,7 +369,7 @@ input#complete.update-input {
   border: 3 solid black;
 }
 
-.drop-down-button {
+.drop-down-button{
   background: rgb(0, 0, 0);
   text-align: center;
   border-radius: 5px;
@@ -399,13 +399,13 @@ input#complete.update-input {
   background-color: black;
   color: white;
 }
-
+  
 input.dark-mode {
   background-color: white;
   color: black;
   border: white solid 3px;
 }
-
+  
 input.dark-mode:hover {
   background: rgb(72, 145, 173);
   text-align: center;
@@ -413,17 +413,17 @@ input.dark-mode:hover {
   border: 3px solid rgb(255, 255, 255);
   color: #fff;
   cursor: pointer;
-  text-transform: uppercase; 
+  text-transform: uppercase;
   width: 200px;
   height: 30px;
 }
-
+  
 button.dark-mode {
   background-color: white;
   color: black;
   border: white solid 3px;
 }
-
+  
 button.dark-mode:hover {
   background: rgb(72, 145, 173);
   text-align: center;
@@ -431,11 +431,17 @@ button.dark-mode:hover {
   border: 3px solid rgb(255, 255, 255);
   color: #fff;
   cursor: pointer;
-  text-transform: uppercase; 
+  text-transform: uppercase;
   width: 200px;
   height: 30px;
 }
-
+  
+.center-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
 .toggle-button {
   background: rgb(0, 0, 0);
   text-align: center;
@@ -444,12 +450,13 @@ button.dark-mode:hover {
   border: 3px solid black;
   color: #fff;
   cursor: pointer;
-  text-transform: uppercase; 
+  text-transform: uppercase;
   transition: 0.5s;
   width: 100px;
   height: 30px;
+  margin-bottom: 10px;
 }
-
+  
 .toggle-button:hover {
   background: rgb(72, 145, 173);
   text-align: center;
@@ -458,9 +465,39 @@ button.dark-mode:hover {
   border: 3px solid black;
   color: #fff;
   cursor: pointer;
-  text-transform: uppercase; 
+  text-transform: uppercase;
   width: 100px;
   height: 30px;
+  margin-bottom: 10px;
+}
+  
+.toggle-button.dark-mode {
+  background: rgb(255, 255, 255);
+  text-align: center;
+  font-size:10px;
+  border-radius: 5px;
+  border: 3px solid rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.5s;
+  width: 100px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+  
+.toggle-button.dark-mode:hover {
+  background: rgb(72, 145, 173);
+  text-align: center;
+  font-size:10px;
+  border-radius: 5px;
+  border: 3px solid rgb(255, 255, 255);
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 150px;
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 
@@ -476,10 +513,6 @@ button.dark-mode:hover {
 .grid {
   margin: 0 auto;
   text-align: center;
-}
-
-.toggle-button{
-  
 }
 
 .vanish {
@@ -566,8 +599,20 @@ button.dark-mode:hover {
   margin-bottom: 40px;
 }
 
+.grid-parent{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+@media screen and (max-width: 600px) {
+  .grid-parent{
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
+
 .search-width {
-  width: 60%;
+  width: 70%;
 }
 
 .pin-button {
@@ -576,7 +621,7 @@ button.dark-mode:hover {
   font-size: large;
   border-radius: 10px;
   width: 30%;
-  height: 50px;
+  height: 30px;
   margin: 5px;
   border: 3px solid black;
   color: #fff;
@@ -633,7 +678,9 @@ footer{
 
 /*===== Error page =====*/
 .error-page{
-  background-image: url('/img/img8.jpg') no-repeat center center fixed;
+  background: url('/img/img8.jpg') fixed center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .error-page-text {
@@ -699,3 +746,13 @@ footer{
   align-items: center;
 }
 
+@media screen and (max-width: 600px) {
+  .creator-wrapper{
+    display: grid;
+    grid-template-columns: 1;
+  }
+  .creator-left,
+  .creator-right {
+  width: 90%;
+  padding-left: 30px;
+}

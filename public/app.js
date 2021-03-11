@@ -1,5 +1,3 @@
-const unirest = require("unirest");
-
 window.onload = () => {
   $('.grid').masonry({
     itemSelector: '.grid-item',
