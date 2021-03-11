@@ -1,54 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="/styles/base.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DETAILS</title>
-  </head>
+<head>
+  <link rel="stylesheet" href="/styles/base.css">
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DETAILS</title>
+</head>
 <body class="details-page">
   <%- include('./layout/header.ejs') %>
   <main class="update-main">
     <h1>UPDATE YOUR PIN</h1>
     <div class="update-wrapper">
-            <!-- ACTION & METHOD-->
-
-
-
-      <% visionList.forEach(vision => { %>
-      <form action="/details/<%= vision.id%>?_method=PUT" method="POST"> 
-        <fieldset class="update-input-fields">
-          <div class="update-left">
-            <label>Modify your visions, set a deadline, or remove your goals from your board</label>
-            <!-- DESCRIPTION -->
-            <input class="update-input" id="large-msg-box" type="textarea" placeholder=" visionList.user.description" name="description" value="<%= vision.description%>">
-            <input class="update-input" id="date" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31" name="deadline" value="<%= vision.description%>">
-            <!-- DEADLINE -->
-            <div class="deadline-checkbox">
-              <!-- <input class="update-input" type="checkbox" id="complete"> -->
-              <label id="complete" for="complete">Goal Achieved</label>
-            </div>
-          </div>
-          <div class="update-right">
-                <!-- IMAGE -->
-                  <img src="<%= vision.image_url%>" class="update-img"/>
-                  <!-- BUTTONS-->
-                  <input class="button" type="submit" value="Update">
-                </div>
-              </fieldset>
-            </form>
-            <% }) %>
-
-
-
-      <!-- DELETE -->
-      <% visionList.forEach(vision => { %>
-          <form class="update-form" action="/details/<%= vision.id%>?_method=DELETE" method="POST" >
-            <input class="button" type="submit" value="Delete">
+      <!--FORM START-->
+      <div class="update-form">
+          <% visionList.forEach(vision => { %>
+          <form action="/details/<%= vision.id%>?_method=PUT" method="POST"> 
+            <fieldset class="update-input-fields">
+        <!--LEFT START-->
+        <div class="update-left">
+          <label>Modify your visions, set a deadline, or remove your goals from your board</label>
+          <input class="update-input" id="large-msg-box" type="textarea" placeholder="Add description" name="description" value="<%= vision.description%>">
+          <input class="update-input" id="date" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31" name="deadline" value="<%= vision.deadline%>">
+          <p id="complete"></p>
+          <p class="bottom-left">📸 Photographer:  <a class="credit-link" href="<%= vision.author_url %> "> <%= vision.author || "no sorce"%> </a></p>
+        </div>
+        <!--LEFT END-->
+        <!--RIGHT START-->
+        <div class="update-right">
+            <img src="<%= vision.image_url%>" class="update-img"/>
+            <input class="button" type="submit" value="Update">
           </form>
-      <% }) %>
-
+          <% }) %>
+          <% visionList.forEach(vision => { %>
+          <form action="/details/<%= vision.id%>?_method=DELETE" method="POST" >
+            <input class="button" type="submit" value="Delete">
+            </fieldset>
+          </form>
+          <% }) %>
+        </div>
+        <!--RIGHT END-->
+        <!--FORM END-->
+      </div>  
     </div>
   </main>
   <%- include('./layout/footer.ejs') %>

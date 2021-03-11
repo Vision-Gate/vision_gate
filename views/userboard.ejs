@@ -26,7 +26,7 @@
     <div class ="grid">
       <% visionQuery.visionList.forEach(image => { %>
         <form action="/details" method="POST" type="submit">
-          <button>
+          <button class="vanish">
           <div class="grid-item">
             <img src="<%= image.image_url %>" alt="my pin">
             <div class="details">

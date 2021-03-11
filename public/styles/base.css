@@ -15,6 +15,7 @@ body{
   padding: 0;
   background: no-repeat center center fixed;
   background-size: cover;
+  background-color: rgb(90, 90, 90);
   height: 100vh;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
@@ -102,6 +103,13 @@ h5 {
   font-size: 15px;
 }
 
+h6{
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  margin: 10px;
+}
+
 /*===== Home Page Form =====*/
 .wrapper{
   position: relative;
@@ -119,6 +127,7 @@ fieldset {
   padding: 30px;
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
   box-shadow: 0 0 10px rgba(0,0,0,0.13);
 }
 
@@ -266,6 +275,11 @@ input#complete.update-input {
 .update-right {
   width: 45%;
   margin: 10px;
+  flex-direction: column;
+}
+
+.update-left {
+  position: relative;
 }
 
 .update-input {
@@ -319,6 +333,28 @@ input#complete.update-input {
   justify-content: center;
 }
 
+.bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 12px;
+  color: #fff;
+}
+
+.bottom-left a {
+  font-size: 12px;
+  font-style: italic;
+  color: rgb(216, 216, 216);
+}
+
+#complete {
+  position: absolute;
+  font-size: 14px;
+  color: #fff;
+  left: 0;
+  bottom: 10%;
+}
+
 /*===== User board dropdown form =====*/
 .drop-down{
   display: flex;
@@ -370,6 +406,11 @@ input#complete.update-input {
 .grid {
   margin: 0 auto;
   text-align: center;
+}
+
+.vanish {
+  border: none;
+  background-color: transparent;
 }
 
 /*===== User board hover text =====*/
@@ -513,4 +554,73 @@ footer{
   color: rgb(113, 166, 216);
   display: block;
   font-size: 12px;
+}
+
+
+/*===== Error page =====*/
+.error-page{
+  background-image: url('/img/img8.jpg') no-repeat center center fixed;
+}
+
+.error-page-text {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+/*===== Creators Page =====*/
+
+.creator-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.creator-wrapper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: rgba(192, 192, 192, 0.8);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.creator-wrapper p{
+  color: rgb(0, 0, 0);
+  text-shadow: rgb(255, 255, 255) 1px 0 10px;
+}
+
+.creator-left,
+.creator-right {
+  width: 45%;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.creator-img {
+  width: 60%;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.creator-body {
+  margin: 0;
+  padding: 0;
+  background: url('/img/img15.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.social {
+  height: 40px;
+  margin: 10px;
+  bottom: 0px;
+  position: relative;
+}
+
+.creator-social {
+  display: flex;  
+  justify-content: center;
+  align-items: center;
 }
