@@ -54,7 +54,8 @@ function displayHomePage(req, res) {
         .then(results => {
           console.log("From displayHomePage: " + results.rows[0]);
           const users = results.rows;
-          const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
+          console.log(users);
+          const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));          
           const ejsObject = {hpElements:{quote, users}};
           res.render('./index.ejs', ejsObject);
         })
@@ -149,7 +150,7 @@ function deleteEntry(req, res) {
     .then(results => {
       console.log(results);
       res.redirect('/userboard')
-    })
+    })  .catch(error => handleError(error,res));
 }
 function updateEntry(req, res) {
   console.log('in the update function', req.body);
@@ -158,7 +159,8 @@ function updateEntry(req, res) {
   client.query(sqlStr, sqlArr)
     .then
     (res.redirect('/userboard'))
-}
+    .catch(error => handleError(error,res));
+}   
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
 }

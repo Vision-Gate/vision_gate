@@ -137,7 +137,7 @@ function remainingDays() {
   field.value = `${year}-${month}-${day}`;
   let remainingDayText = calculateRemainingDays(Number(month), day, year);
   document.getElementById('complete').innerText = remainingDayText;
-  document.querySelector('#setDate').hidden = true;
-  document.getElementById('complete').hidden = false;
+  // document.querySelector('#setDate').hidden = true;
+  // document.getElementById('complete').hidden = false;
 }
   //#endregion
