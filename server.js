@@ -155,7 +155,7 @@ function deleteEntry(req, res) {
     .then(results => {
       console.log(results);
       res.redirect('/userboard')
-    })
+    })  .catch(error => handleError(error,res));
 }
 function updateEntry(req, res) {
   console.log('in the update function', req.body);
@@ -164,7 +164,8 @@ function updateEntry(req, res) {
   client.query(sqlStr, sqlArr)
     .then
     (res.redirect('/userboard'))
-}
+    .catch(error => handleError(error,res));
+}   
 function displayAboutUs(req, res) {
   res.render('./about_us.ejs')
 }
