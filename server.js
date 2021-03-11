@@ -40,9 +40,16 @@ function displayHomePage(req, res) {
   const url = `http://quotes.stormconsultancy.co.uk/popular.json`;
   superagent.get(url)
     .then(resultsFromAPI => {
-      const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
-      const ejsObject = {quote};
-      res.render('./index.ejs', ejsObject);
+      const sqlString = 'SELECT * FROM users;';
+      const sqlArray = [];
+      client.query(sqlString, sqlArray)
+        .then(results => {
+          console.log(results.rows[0]);
+          const users = results.rows;
+          const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));
+          const ejsObject = {hpElements:{quote, users}};
+          res.render('./index.ejs', ejsObject);
+        })
     })
 }
 function populateDefaultUserboard(req,res){
@@ -80,6 +87,8 @@ function includeSavedUsersToDropdown(visionList,userList,res){
 function displayUsersboard(req, res) {
   const sqlUserString = 'SELECT * FROM users;';
   const sqlUserArr = [];
+  console.log('in the displayUserBoard function');
+  console.log(req.body);
   client.query(sqlUserString,sqlUserArr)
   .then(savedUserResult =>{
     const sqlString = 'SELECT * FROM visions WHERE username=$1;';
@@ -88,7 +97,7 @@ function displayUsersboard(req, res) {
     savedUserResult.rows.map(user =>{if(!userList.includes(user.username))
       {
         userList.push(user.username);
-        userList.push(user.id);
+        // userList.push(user.id);
       } 
     });
     client.query(sqlString,sqlArr)
