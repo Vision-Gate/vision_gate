@@ -13,28 +13,42 @@
     <h1>UPDATE YOUR PIN</h1>
     <div class="update-wrapper">
             <!-- ACTION & METHOD-->
-      <form class="update-form" action="/categories" method="POST"> 
+
+
+
+      <% visionList.forEach(vision => { %>
+      <form action="/details/<%= vision.id%>?_method=PUT" method="POST"> 
         <fieldset class="update-input-fields">
           <div class="update-left">
             <label>Modify your visions, set a deadline, or remove your goals from your board</label>
             <!-- DESCRIPTION -->
-            <input class="update-input" id="large-msg-box" type="textarea" placeholder="Add a description">
-            <input class="update-input" type="date">
+            <input class="update-input" id="large-msg-box" type="textarea" placeholder=" visionList.user.description" name="description" value="<%= vision.description%>">
+            <input class="update-input" id="date" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31" name="deadline" value="<%= vision.description%>">
             <!-- DEADLINE -->
             <div class="deadline-checkbox">
-              <input class="update-input" type="checkbox" id="complete">
+              <!-- <input class="update-input" type="checkbox" id="complete"> -->
               <label id="complete" for="complete">Goal Achieved</label>
             </div>
           </div>
           <div class="update-right">
                 <!-- IMAGE -->
-            <img src="/img/img3.jpg" class="update-img"/>
-                <!-- BUTTONS-->
-            <input class="button" type="submit" value="Update">
+                  <img src="<%= vision.image_url%>" class="update-img"/>
+                  <!-- BUTTONS-->
+                  <input class="button" type="submit" value="Update">
+                </div>
+              </fieldset>
+            </form>
+            <% }) %>
+
+
+
+      <!-- DELETE -->
+      <% visionList.forEach(vision => { %>
+          <form class="update-form" action="/details/<%= vision.id%>?_method=DELETE" method="POST" >
             <input class="button" type="submit" value="Delete">
-          </div>
-        </fieldset>
-      </form>
+          </form>
+      <% }) %>
+
     </div>
   </main>
   <%- include('./layout/footer.ejs') %>
