@@ -15,6 +15,11 @@
     <h1>NO RESULTS FOUND...TRY AGAIN</h1>
     <% } else { %>
     <h1>SEARCH RESULTS</h1>
+      <form action="/search" method="POST">
+        <input class="input" type="text" name="search_query" required placeholder="Vision search">
+        <input type="text" hidden name="username" value="<%= visionQuery.currentUsername %>">
+        <input class="button" type="submit" value="search">
+      </form>
     <div class ="grid grid-parent">
   <% visionQuery.visionList.forEach(image => { %>
       <div class="search-container">
