@@ -45,8 +45,6 @@ function displayHomePage(req, res) {
   const sqlUserArr=['default'];
   client.query(sqlUserStr,sqlUserArr)
   .then(result => {
-    console.log("Added Default user to database");
-    console.log(result);
   })
   .catch(error => console.log("Something went wrong: ",error));
   superagent.get(url)
@@ -55,9 +53,7 @@ function displayHomePage(req, res) {
     const sqlArray = [];
     client.query(sqlString, sqlArray)
     .then(results => {
-      console.log("From displayHomePage: " + results.rows[0]);
       const users = results.rows;
-      console.log(users);
       const quote = getRandomQuote(new createQuoteList(resultsFromAPI.body));          
       const ejsObject = {hpElements:{quote, users}};
       res.render('./index.ejs', ejsObject);
@@ -134,9 +130,9 @@ function conductSearch(req, res) {
   superagent.get(url)
   .then(results => {
       const visionList = new createVisionList(results.body.results,req.body.username);
-      console.log(visionList);
-      const query = req.body
-      const ejsObject = {visionQuery: {visionList, query}};
+      const query = req.body;
+      const currentUsername = req.body.username;
+      const ejsObject = {visionQuery: {visionList, query, currentUsername}};
       res.render('./saves.ejs', ejsObject);
   })
   .catch(error => handleError(error,res));
@@ -149,19 +145,15 @@ function addToBoard(req, res) {
   .catch(error => handleError(error,res));
 }
 function deleteEntry(req, res) {
-  console.log('in the delete function');
-  console.log(req.params.id)
   const sqlString = 'DELETE FROM visions WHERE id=$1;';
   const sqlArr = [req.params.id];
   client.query(sqlString, sqlArr)
     .then(results => {
-      console.log(results);
       res.redirect('/userboard')
     })  .catch(error => handleError(error,res));
 }
 function updateEntry(req, res) {
-  console.log('in the update function', req.body);
-  const sqlStr = 'UPDATE visions SET description=$1, deadline=$2 WHERE id=$3;'; //need image to transfer id when brought to details page
+  const sqlStr = 'UPDATE visions SET description=$1, deadline=$2 WHERE id=$3;';
   const sqlArr = [req.body.description, req.body.deadline, req.params.id];
   client.query(sqlStr, sqlArr)
     .then
@@ -205,13 +197,16 @@ function Quote (quote, id, author) {
   this.author = author;
 }
 function createQuoteList (object) {
-  return object.map (obj => {
+  let quoteList = object.map (obj => {
     const badIdx = [20, 29, 31, 28, 34, 13, 33];
     let id;
     if (!badIdx.includes(obj.id)) {
       id = obj.id;
+      return new Quote(obj.quote, id, obj.author);
     }
-  return new Quote(obj.quote, id, obj.author);
+  });
+  return quoteList.filter(value => {
+    return value !== undefined;
   });
 }
 function getRandomQuote (quoteList) {
