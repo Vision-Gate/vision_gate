@@ -22,12 +22,12 @@
           <div class="update-left">
             <label>Modify your visions, set a deadline, or remove your goals from your board</label>
             <!-- DESCRIPTION -->
-            <input class="update-input" id="large-msg-box" type="textarea" placeholder=" visionList.user.description" name="description" value="<%= vision.description%>">
+            <input class="update-input" id="large-msg-box" type="textarea" placeholder="Add description" name="description" value="<%= vision.description%>">
             <input class="update-input" id="date" onchange="remainingDays()" type="date"  min="2021-01-01" max="2031-12-31" name="deadline" value="<%= vision.description%>">
             <!-- DEADLINE -->
             <div class="deadline-checkbox">
               <!-- <input class="update-input" type="checkbox" id="complete"> -->
-              <label id="complete" for="complete">Goal Achieved</label>
+              <p> 📸 :<a href="<%= vision.author_url %> "> <%= vision.author %> </a></p>
             </div>
           </div>
           <div class="update-right">

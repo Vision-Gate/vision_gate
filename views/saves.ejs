@@ -19,6 +19,8 @@
         <form action="/newentry" method="POST">
           <input type="text" hidden name="image" value="<%= image.image_url %>">
           <input type="text" hidden name="username" value="<%= image.username %>">
+          <input type="text" hidden name="image_author" value="<%= image.image_author %>">
+          <input type="text" hidden name="image_author_url" value="<%= image.image_author_url %>">
           <input type="submit" value="pin" class="pin-button">
         </form>
       </div>
