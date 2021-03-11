@@ -23,7 +23,10 @@
       <input type="submit" class="drop-down-button" id="theme-button">
       </form>
     </div>
-    <button class="toggle-button" id="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
+    <div class="center-button">
+      <button class="toggle-button" id="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
+    </div>
+
     <div class ="grid">
       <% visionQuery.visionList.forEach(image => { %>
         <form action="/details" method="POST" type="submit">
@@ -38,9 +41,9 @@
             <input type="text" hidden name="id" value="<%= image.id %>">
           </div> 
         </button>
-            <!-- <input type="submit" value="details"> -->
         </form>
     <% }) %>
+    </div>
   </main>
   <%- include('./layout/footer.ejs') %>
   <script src="app.js"></script>
