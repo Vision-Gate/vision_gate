@@ -118,6 +118,7 @@ const getCurrentDate = () => {
   return { day: day, month: [month, sMonth], year: year };
 }
 const calculateRemainingDays = (gMonth, gDay, gYear) => {
+  let message;
   let currentDate = getCurrentDate();
   let currJulianDay = convertToJulian
     (
@@ -126,7 +127,28 @@ const calculateRemainingDays = (gMonth, gDay, gYear) => {
       currentDate.year
     );
   let goalJulianDay = convertToJulian(gMonth, gDay, gYear);
-  return `${goalJulianDay - currJulianDay} days remaining until ${gMonth}/${gDay}/${gYear} `;
+  let totalYears = gYear - currentDate.year;
+  let totalDays = (totalYears * 365) + goalJulianDay - currJulianDay;
+  let remainingDays;
+  let remainingMonths;
+  let remainingYears;
+  if(totalDays <= 31)
+  {
+    remainingDays = totalDays
+    message = `${remainingDays} days remaining until ${gMonth}/${gDay}/${gYear}`;
+  }
+  else if(totalDays >= 31 && totalDays < 366){
+    remainingMonths = Math.floor(totalDays / 30);
+    remainingDays = totalDays - (remainingMonths * 30);
+    message = ` ${remainingMonths} months and ${remainingDays} days remaining until ${gMonth}/${gDay}/${gYear}`
+  }
+  else{
+    remainingYears = Math.floor(totalDays / 365);
+    remainingMonths = Math.floor((totalDays - (totalYears * 365)) / 12) ;
+    remainingDays = totalDays - ((remainingYears * 365) + (remainingMonths * 12));
+    message = `${remainingYears} years, ${remainingMonths} months, and ${remainingDays} days until ${gMonth}/${gDay}/${gYear}`;
+  }
+  return message;
 }
 function remainingDays() {
   let field = document.querySelector('#date');
