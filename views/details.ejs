@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/modules.css">
   <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DETAILS</title>
+  <title>Update You Pin</title>
 </head>
 <body class="details-page">
   <%- include('./layout/header.ejs') %>
@@ -30,7 +32,7 @@
         <!--RIGHT START-->
         <div class="update-right">
             <img src="<%= vision.image_url%>" class="update-img"/>
-            <input class="button" type="submit" value="Update">
+            <input id="button-fix" class="button" type="submit" value="Update">
           </form>
           <% }) %>
           <% visionList.forEach(vision => { %>

@@ -1,5 +1,15 @@
 # Vision Gate
 
+## Authors
+* [Anthony Johnson](https://github.com/orgs/Vision-Gate/people/TheAJHarris) 
+* [Barrett Nance](https://github.com/orgs/Vision-Gate/people/baxance)
+* [Leaundrae Mckinney](https://github.com/orgs/Vision-Gate/people/UreaLaden)
+* [Lydia Minehan-Tubic](https://github.com/orgs/Vision-Gate/people/LydiaMT)
+
+## See our Website
+* [Link to Vision Gate](http://www.vision-gate.xyz/)
+
+## User Stories
 1. Image Search
 
   As a user I want to be able to search a database of images so that I can add them to my vision board. 
@@ -53,4 +63,18 @@ STRETCH: As a user I would like to be able to choose from a selection of layouts
   Feature Task: Add a ‘theme’ button to the ‘/userboard/:user’ board so the user can pick from a theme.
 
   Acceptance Test: When the user selects their chosen theme, the style of the page changes.
+
+## References
+
+* [Background image animation](https://www.youtube.com/watch?v=Kd9LBwfB7Hc)
+* [Image drop shadow](https://www.w3schools.com/cssref/css3_pr_text-shadow.asp)
+* [Masonry Documentation](https://masonry.desandro.com/options.html)
+* [Learn Masonry JS in 5 Minutes](https://www.youtube.com/watch?v=_IAFA2kA840)
+* [Simple Tile Hover Effect](https://codepen.io/chrisdothtml/pen/OVmgwK)
+* [SCSS to CSS](https://jsonformatter.org/scss-to-css)
+* [How to create a link that goes to the top of a web page](https://www.computerhope.com/issues/ch001475.htm)
+* [Simple Centered Navigation Bar](https://www.youtube.com/watch?v=R5aRUdM7Iio)
+* [Responsive Contact us form Using HTML and CSS - contact form design](https://www.youtube.com/watch?v=l_Z3N3etkS0&t=644s)
+* [text-shadow](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow)
+* [Darkmode toggle](https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp)
 
