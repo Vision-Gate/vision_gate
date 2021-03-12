@@ -3,22 +3,29 @@
 <head>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/modules.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Search Results</title>
 </head>
 <body>
   <%- include('./layout/header.ejs') %>
   <main>
     <% if (visionQuery.visionList.length === 0) { %>
     <h1>NO RESULTS FOUND...TRY AGAIN</h1>
+    <form class="redo-form" action="/search" method="POST">
+      <input class="redo-input" type="text" name="search_query" required placeholder="Vision search">
+      <input type="text" hidden name="username" value="<%= visionQuery.currentUsername %>">
+      <input class="redo-button" type="submit" value="Try searching again">
+    </form>
     <% } else { %>
     <h1>SEARCH RESULTS</h1>
-      <form action="/search" method="POST">
-        <input class="input" type="text" name="search_query" required placeholder="Vision search">
+      <form class="redo-form" action="/search" method="POST">
+        <input class="redo-input" type="text" name="search_query" required placeholder="Vision search">
         <input type="text" hidden name="username" value="<%= visionQuery.currentUsername %>">
-        <input class="button" type="submit" value="search">
+        <input class="redo-button" type="submit" value="search for more">
       </form>
     <div class ="grid grid-parent">
   <% visionQuery.visionList.forEach(image => { %>
@@ -29,6 +36,7 @@
           <input type="text" hidden name="username" value="<%= image.username %>">
           <input type="text" hidden name="image_author" value="<%= image.image_author %>">
           <input type="text" hidden name="image_author_url" value="<%= image.image_author_url %>">
+          <input type="text" hidden name="description" value="Click to add description and deadline">
           <input type="submit" value="pin" class="pin-button">
         </form>
       </div>
