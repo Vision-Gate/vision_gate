@@ -14,7 +14,7 @@
   <main>
     <h1 id="theme-header">MY VISION BOARD</h1>
     <div class="drop-down">
-      <form action="/userboard" method="POST">
+      <form class="choose-user" action="/userboard" method="POST">
       <select action='/userboard' name="choice" class="drop-down-form">
         <option name='username' value="default" selected>Choose a User</option>
         <% visionQuery.userList.forEach(user => { %>

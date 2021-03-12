@@ -69,6 +69,22 @@ body{
   background:rgb(72, 145, 173)
 }
 
+@media screen and (max-width: 600px) {
+  .nav-ul {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+  .nav-li {
+    margin: 0 auto;
+  }
+  .navbar a{
+    padding:15px;
+  }
+}
+
+
+
+
 /*===== h1-h6 tags =====*/
 h1 {
   text-align: center;
@@ -176,7 +192,8 @@ label {
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
-  text-transform: uppercase; 
+  text-transform: uppercase;
+  -webkit-appearance: none; 
 }
 
 /*===== Home Page Bottom Text =====*/
@@ -232,6 +249,7 @@ fieldset {
 
 .update-form {
   max-width: 650px;
+  min-height: 300px;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
@@ -276,6 +294,7 @@ input#complete.update-input {
   width: 45%;
   margin: 10px;
   flex-direction: column;
+  min-height: 400px;
 }
 
 .update-left {
@@ -317,6 +336,7 @@ input#complete.update-input {
   width: 100%;
   justify-content: center;
   transition: 0.5s;
+  -webkit-appearance: none;
 }
 
 .button:hover {
@@ -331,9 +351,15 @@ input#complete.update-input {
   text-transform: uppercase; 
   width: 100%;
   justify-content: center;
+  -webkit-appearance: none;
+}
+
+#button-fix {
+  margin-top: 40px;
 }
 
 .bottom-left {
+  padding-top: 10px;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -346,6 +372,9 @@ input#complete.update-input {
   font-style: italic;
   color: rgb(216, 216, 216);
 }
+#date{
+  padding-bottom: 10px;
+}
 
 #complete {
   position: absolute;
@@ -353,13 +382,32 @@ input#complete.update-input {
   color: #fff;
   left: 0;
   bottom: 10%;
+  padding-bottom: 10px;
 }
 
 /*===== User board dropdown form =====*/
 .drop-down{
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 50px;
+}
+
+.choose-user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-appearance: none;
+}
+
+@media screen and (max-width: 600px) {
+  .choose-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+  }
 }
 
 .drop-down-form{
@@ -380,6 +428,7 @@ input#complete.update-input {
   transition: 0.5s;
   width: 200px;
   height: 30px;
+  -webkit-appearance: none;
 }
 
 .drop-down-button:hover {
@@ -392,6 +441,7 @@ input#complete.update-input {
   text-transform: uppercase; 
   width: 200px;
   height: 30px;
+  -webkit-appearance: none;
 }
 
 /*===== User board Dark/Light Mode=====*/
@@ -422,6 +472,7 @@ button.dark-mode {
   background-color: white;
   color: black;
   border: white solid 3px;
+  -webkit-appearance: none;
 }
   
 button.dark-mode:hover {
@@ -434,12 +485,14 @@ button.dark-mode:hover {
   text-transform: uppercase;
   width: 200px;
   height: 30px;
+  -webkit-appearance: none;
 }
   
 .center-button{
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-appearance: none;
 }
   
 .toggle-button {
@@ -455,6 +508,7 @@ button.dark-mode:hover {
   width: 100px;
   height: 30px;
   margin-bottom: 10px;
+  -webkit-appearance: none;
 }
   
 .toggle-button:hover {
@@ -484,6 +538,7 @@ button.dark-mode:hover {
   width: 100px;
   height: 30px;
   margin-bottom: 10px;
+  -webkit-appearance: none;
 }
   
 .toggle-button.dark-mode:hover {
@@ -498,6 +553,7 @@ button.dark-mode:hover {
   width: 150px;
   height: 30px;
   margin-bottom: 10px;
+  -webkit-appearance: none;
 }
 
 
@@ -595,6 +651,34 @@ button.dark-mode:hover {
 }
 
 /*===== Searches =====*/
+.redo-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.redo-input {
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+}
+
+.redo-button {
+  width: 208px;
+  background: rgb(72, 145, 173);
+  text-align: center;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  height: 36px;
+  margin-bottom: 30px;
+  -webkit-appearance: none;
+}
+
 .search-container {
   margin-bottom: 40px;
 }
@@ -628,6 +712,7 @@ button.dark-mode:hover {
   cursor: pointer;
   text-transform: uppercase; 
   transition: 0.5s;
+  -webkit-appearance: none;
 }
 
 .pin-button:hover {
@@ -636,12 +721,13 @@ button.dark-mode:hover {
   font-size: large;
   border-radius: 10px;
   width: 30%;
-  height: 50px;
+  height: 30px;
   margin: 5px;
   border: 3px solid black;
   color: black;
   cursor: pointer;
   text-transform: uppercase; 
+  -webkit-appearance: none;
 }
 /*===== Footer =====*/
 footer{
@@ -719,7 +805,7 @@ footer{
 }
 
 .creator-img {
-  width: 60%;
+  width: 50%;
   border-radius: 50%;
   padding: 10px;
 }
@@ -755,4 +841,5 @@ footer{
   .creator-right {
   width: 90%;
   padding-left: 30px;
+  }
 }

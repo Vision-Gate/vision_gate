@@ -15,7 +15,7 @@
     <h1>CHOOSE YOUR BOARD</h1>
             <!--DROP DOWN FORM-->
     <div class="drop-down">
-      <form action="/userboard" method="POST">
+      <form class="choose-user" action="/userboard" method="POST">
         <select action='/userboard' name="choice" class="drop-down-form">
         <option name='username' value="default" selected>Choose a User</option>
         <% visionQuery.combinedUsers.forEach(user => { %>
